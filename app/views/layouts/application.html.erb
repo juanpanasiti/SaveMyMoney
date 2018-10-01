@@ -1,15 +1,108 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SaveMyMoney</title>
+    <title>SaveMyWallet</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
 
   <body>
-    <%= yield %>
+    <!-- Refactor 09-2018 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+      <%= link_to(root_path, class: "navbar-brand brand-title") do %>
+        <img src="/assets/Money.png" width="60" height="60" class="d-inline-block" alt="">
+        SaveMyWallet
+      <% end %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <%= link_to(root_path, class: "nav-link btn") do %>
+              <%= icon('fas','tachometer-alt', class: "fa-2x") %>
+              <div class="">
+                Home
+              </div>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to(root_path, class: "nav-link btn") do %>
+              <%= icon('fas','money-bill-wave', class: "fa-2x") %>
+              <div class="">
+                Pagos
+              </div>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to(root_path, class: "nav-link btn") do %>
+              <%= icon('far','credit-card', class: "fa-2x") %>
+              <div class="">
+                T. Crédito
+              </div>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to(root_path, class: "nav-link btn") do %>
+              <%= icon('fas','shopping-cart', class: "fa-2x") %>
+              <div class="">
+                Compras
+              </div>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to(root_path, class: "nav-link btn") do %>
+              <%= icon('fas','file-invoice-dollar', class: "fa-2x") %>
+              <div class="">
+                Impuestos
+              </div>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to(root_path, class: "nav-link btn") do %>
+              <%= icon('fas','calendar-alt', class: "fa-2x") %>
+              <div class="">
+                P. Mensuales
+              </div>
+            <% end %>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to(edit_user_registration_path, class: "nav-link btn") do %>
+            <%= icon('fas','user-cog', class: "fa-2x") %>
+            <div class="">
+              Editar
+            </div>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to(destroy_user_session_path, method: :delete, class: "nav-link btn") do %>
+            <%= icon('fas','user-slash', class: "fa-2x") %>
+            <div class="">
+              Cerrar Sesión
+            </div>
+            <% end %>
+          </li>
+        <% end %>
+        <li class="nav-item">
+          <%= link_to(root_path, class: "nav-link btn") do %>
+          <%= icon('fas','question-circle', class: "fa-2x") %>
+          <div class="">
+            Acerca de
+          </div>
+          <% end %>
+        </li>
+      </ul>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
   </body>
 </html>
