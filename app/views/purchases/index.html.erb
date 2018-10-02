@@ -1,0 +1,26 @@
+<h1> Compras </h1>
+<%= link_to icon('fas','plus'), new_purchase_path, class: "btn btn-success" %>
+<table class="table table-stripped table-dark">
+  <thead>
+    <th>Item</th>
+    <th>Forma de Pago</th>
+    <th>Monto</th>
+    <th>Cuotas</th>
+    <th>Primer Pago</th>
+    <th>Saldo Restante</th>
+    <th>Estado</th>
+    <th>Opciones</th>
+  </thead>
+  <tbody>
+    <% @purchases.each do |p| %>
+    <td> <%=  %> </td>
+    <td> <%=  %> </td>
+    <td> <%=  %> </td>
+    <td> <%=  %> </td>
+    <td> <%=  %> </td>
+    <td> <%=  %> </td>
+    <td> <%=  %> </td>
+    <td>  </td>
+    <% end %>
+  </tbody>
+</table>

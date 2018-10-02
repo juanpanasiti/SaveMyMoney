@@ -1,0 +1,31 @@
+<%= simple_form_for @purchase do |l| %>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-7 col-md-4 col-lg-4">
+      <%= l.input :name, label:'Item' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-7 col-md-4 col-lg-4">
+      <%= l.input :credit_card, label:'Tarjeta de Crédito' %>
+    </div>
+    <div class="col-xs-12 col-sm-7 col-md-4 col-lg-4">
+      <%= l.input :amount, label:'Monto' %>
+    </div>
+    <div class="col-xs-12 col-sm-7 col-md-4 col-lg-4">
+      <%= l.input :fees, label:'Cuotas' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-7 col-md-4 col-lg-4">
+      <%= l.input :first_payment, label:'Primer Pago' %>
+    </div>
+  </div>
+
+
+
+  <%= l.button :submit, 'Guardar', class: "btn btn-success" %>
+  <%= link_to icon('fas',"back","Cancelar"), credit_cards_path, class: "btn btn-warning" %>
+<% end %>
