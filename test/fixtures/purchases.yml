@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  name: MyString
+  credit_card: one
+  amount: 9.99
+  fees: 1
+  first_payment: 2018-10-02
+  status: MyString
+
+two:
+  user: two
+  name: MyString
+  credit_card: two
+  amount: 9.99
+  fees: 1
+  first_payment: 2018-10-02
+  status: MyString

@@ -24,7 +24,13 @@ class CreditCardsController < ApplicationController
     #code
   end#edit
   def update
-    #code
+    respond_to do |format|
+      if @credit_card.update(credit_card_params)
+        format.html { redirect_to credit_cards_path, notice: 'Datos de la tarjeta actualizados.' }
+      else
+        format.html { render :edit }
+      end#if/else
+    end#respond_to
   end#update
 
   def destroy
