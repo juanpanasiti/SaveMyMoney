@@ -1,0 +1,20 @@
+<h1>Tarjetas de Crédito</h1>
+<%= link_to icon('fas','plus'), new_credit_card_path, class: "btn btn-primary" %>
+
+
+<div class="row">
+  <% @credit_cards.each do |cc| %>
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+    <div class="card border-info mb-3">
+      <div class="card-header"><h3> <strong> <%= cc.get_issuer %> </strong> </h3></div>
+      <div class="card-body text-info">
+        <h5 class="card-title"><%= cc.get_kind %></h5>
+        <p class="card-text"> Vencimiento: <%= cc.get_expiration %> </p>
+        <p class="card-text"> Saldo: $ ####,## </p>
+        <%= link_to icon('fas','trash'), credit_card_path(cc), method: :delete, data: { confirm: "Seguro?" }, class: "btn btn-danger" %>
+        <%= link_to icon('fas','shopping-cart'), "#", class: "btn btn-info" %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
