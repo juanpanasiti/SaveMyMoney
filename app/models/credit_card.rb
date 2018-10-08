@@ -1,5 +1,6 @@
 class CreditCard < ApplicationRecord
   belongs_to :user
+  has_many :purchases
   # Atributos: user, issuer, kind, expiration
   ####### METHODS
   def get_kind
@@ -7,7 +8,7 @@ class CreditCard < ApplicationRecord
     return kind
   end
   def get_issuer
-    issuer = self.issuer.blank? ?  '' : self.issuer
+    issuer = self.issuer.blank? ?  '' : self.issuer.titleize
     return issuer
   end
   def get_user_name
@@ -18,8 +19,21 @@ class CreditCard < ApplicationRecord
     expiration = self.expiration.blank? ? '' : self.expiration
     return expiration
   end
+  def get_name
+    return "#{self.issuer.titleize} (#{self.kind})"
+  end
+  def get_balance
+    return "$####,##"
+  end
   ####### CLASS METHODS
   def self.get_kind_options
     return ['VISA','MastrerCard','Otra']
+  end
+  def self.get_for_form
+    options = []
+    CreditCard.all.each do |cc|
+      options << [cc.get_name,cc.id]
+    end
+    return options
   end
 end

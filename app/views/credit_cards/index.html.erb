@@ -12,7 +12,29 @@
         <p class="card-text"> Vencimiento: <%= cc.get_expiration %> </p>
         <p class="card-text"> Saldo: $ ####,## </p>
         <%= link_to icon('fas','trash'), credit_card_path(cc), method: :delete, data: { confirm: "Seguro?" }, class: "btn btn-danger" %>
-        <%= link_to icon('fas','shopping-cart'), "#", class: "btn btn-info" %>
+        <%= link_to icon('fas','edit'), edit_credit_card_path(cc), class: "btn btn-warning" %>
+        <%= link_to icon('fas','shopping-cart'), "#", data: { toggle: 'modal', target: ".cc-#{cc.id}" }, class: "btn btn-info" %>
+        <!-- Large modal -->
+        <div class="modal fade <%= raw "cc-#{cc.id}" %>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title"> <%= cc.get_issuer %> <small><%= cc.get_kind %></small> </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <strong>Saldo: </strong> <%= cc.get_balance %>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Fin Modal -->
       </div>
     </div>
   </div>

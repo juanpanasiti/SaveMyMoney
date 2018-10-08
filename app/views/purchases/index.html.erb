@@ -1,26 +1,30 @@
-<h1> Compras </h1>
+<h1> Compras <small><%= @purchases.count %></small>  </h1>
 <%= link_to icon('fas','plus'), new_purchase_path, class: "btn btn-success" %>
 <table class="table table-stripped table-dark">
   <thead>
-    <th>Item</th>
-    <th>Forma de Pago</th>
-    <th>Monto</th>
-    <th>Cuotas</th>
-    <th>Primer Pago</th>
-    <th>Saldo Restante</th>
-    <th>Estado</th>
-    <th>Opciones</th>
+    <tr>
+      <th>Item</th>
+      <th>Forma de Pago</th>
+      <th>Monto</th>
+      <th>Cuotas</th>
+      <th>Primer Pago</th>
+      <th>Saldo Restante</th>
+      <th>Estado</th>
+      <th>Opciones</th>
+    </tr>
   </thead>
   <tbody>
     <% @purchases.each do |p| %>
-    <td> <%=  %> </td>
-    <td> <%=  %> </td>
-    <td> <%=  %> </td>
-    <td> <%=  %> </td>
-    <td> <%=  %> </td>
-    <td> <%=  %> </td>
-    <td> <%=  %> </td>
-    <td>  </td>
+    <tr>
+      <td> <%= p.get_item_name %> </td>
+      <td> <%= p.get_pay_method %> </td>
+      <td> <%= p.get_amount %> </td>
+      <td> <%= p.get_fees %> </td>
+      <td> <%= p.get_first_payment_date %> </td>
+      <td> <%= "??" %> </td>
+      <td> <%= p.get_status %> </td>
+      <td>  </td>
+    </tr>
     <% end %>
   </tbody>
 </table>

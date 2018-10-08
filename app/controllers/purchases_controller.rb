@@ -7,10 +7,17 @@ class PurchasesController < ApplicationController
   end
 
   def new
-    #code
+    @purchase = Purchase.new
   end
   def create
-    #code
+    @purchase = current_user.purchases.new(purchase_params)
+    respond_to do |format|
+      if @purchase.save
+        format.html { redirect_to purchases_path, notice: 'Compra agregada, pero deja de gastar plata!.' }
+      else
+        format.html { render :new }
+      end#if/else
+    end#respond_to
   end
 
   def edit
@@ -34,6 +41,6 @@ class PurchasesController < ApplicationController
   end#purchase_params
 
   def options_for_select
-
+    @credit_cards_options = CreditCard.get_for_form
   end#options_for_select
 end
