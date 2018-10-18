@@ -8,7 +8,7 @@ class CreditCard < ApplicationRecord
     return kind
   end
   def get_issuer
-    issuer = self.issuer.blank? ?  '' : self.issuer.titleize
+    issuer = self.issuer.blank? ?  '' : self.issuer
     return issuer
   end
   def get_user_name

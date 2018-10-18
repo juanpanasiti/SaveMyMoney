@@ -12,7 +12,7 @@
   </div>
   <div class="row">
     <div class="col-xs-12 col-sm-7 col-md-4 col-lg-4">
-      <%= l.input :expiration, label:'Vencimiento', as: :date, start_year: Date.today.year - 5, discard_day: false,
+      <%= l.input :expiration, label:'Vencimiento', as: :date, start_year: Date.today.year - 5, end_year: Date.today.year + 12, discard_day: false,
                                   order: [:month, :year] %>
     </div>
   </div>
