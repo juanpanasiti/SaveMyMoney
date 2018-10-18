@@ -1,0 +1,26 @@
+<h1> Impuestos <small><%= @taxes.count %> por pagar.</small>  </h1>
+<%= link_to icon('fas','plus'), new_tax_path, class: "btn btn-success" %>
+<table class="table table-stripped table-dark">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Servicio</th>
+      <th>Monto</th>
+      <th>Vencimiento</th>
+      <th>Estado</th>
+      <th>Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @taxes.each do |t| %>
+    <tr>
+      <td> <%= t.name %> </td>
+      <td> <%= t.service %> </td>
+      <td>  </td>
+      <td>  </td>
+      <td>  </td>
+      <td>  </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
