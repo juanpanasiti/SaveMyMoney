@@ -27,4 +27,25 @@ class Purchase < ApplicationRecord
   def get_status
     return self.status
   end#get_status
-end
+
+  def generate_payments
+    remaining_amount = self.amount
+    remaining_fees = self.fees
+    saved = true
+    for i in 1..self.get_fees
+      new_payment = self.payments.new
+      #new_payment.payable_type = "purchase"
+      #new_payment.payable_id = self.id
+      new_payment.user_id = self.user_id
+      new_payment.fee = i
+      new_payment.expiration = self.first_payment.advance(months: (i-1)).end_of_month
+      new_payment.amount = (remaining_amount/remaining_fees).round(2)
+      remaining_amount = remaining_amount - new_payment.amount
+      remaining_fees = remaining_fees - 1
+      new_payment.status = "Para pagar"
+      unless new_payment.save!
+        saved = true && saved
+      end
+    end#for
+  end#generate_payments
+end#Purchase

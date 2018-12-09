@@ -1,5 +1,5 @@
 class PurchasesController < ApplicationController
-  before_action :set_purchase, only: [:edit, :update, :destroy]
+  before_action :set_purchase, only: [:edit, :update, :destroy, :create_payments]
   before_action :options_for_select, only: [:new, :create, :edit, :update]
 
   def index
@@ -31,9 +31,21 @@ class PurchasesController < ApplicationController
     #code
   end
 
+  def create_payments
+    createds = Payment.where(payable_type: :purchase).where(payable_id: @purchase.id).count
+    if createds == 0
+      if @purchase.generate_payments
+        redirect_to purchases_path, notice: 'Se cargaron correctamente los pagos pendientes de las compras.'
+      else
+        redirect_to purchases_path, alert: 'Se produjeron errores al guardar los pagos.'
+      end
+    else
+      redirect_to purchases_path, alert: 'Ya existen los pagos para esa compra.'
+    end#if/else
+  end#create_payments
   protected
   def set_purchase
-    @credit_card = CreditCard.find(params[:id])
+    @purchase = Purchase.find(params[:id])
   end#set_purchase
 
   def purchase_params

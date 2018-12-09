@@ -20,9 +20,11 @@ class CreditCard < ApplicationRecord
     return expiration
   end
   def get_name
-    return "#{self.issuer.titleize} (#{self.kind})"
+    return "#{self.issuer} (#{self.kind})"
   end
   def get_balance
+    balance = 0
+    
     return "$####,##"
   end
   ####### CLASS METHODS

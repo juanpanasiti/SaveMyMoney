@@ -1,14 +1,15 @@
 class CreatePayments < ActiveRecord::Migration[5.2]
   def change
     create_table :payments do |t|
-      t.references :user, foreign_key: true
-      t.references :payable, polymorphic: true, index: true
-      #t.references :imageable, polymorphic: true, index: true
-      t.string :fee
+      t.belongs_to :user, foreign_key: true
+      t.belongs_to :payable, polymorphic: true
+      t.integer :fee
       t.decimal :amount
       t.string :status
-
+      t.date :expiration
+      
       t.timestamps
     end
+    add_index :payments, [:payable_id, :payable_type]
   end
 end

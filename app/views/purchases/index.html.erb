@@ -23,7 +23,7 @@
       <td> <%= p.get_first_payment_date %> </td>
       <td> <%= "??" %> </td>
       <td> <%= p.get_status %> </td>
-      <td>  </td>
+      <td> <%= link_to "Crear pagos", create_payments_purchase_path(p), method: :post, class: "btn btn-primary" %> </td>
     </tr>
     <% end %>
   </tbody>

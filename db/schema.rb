@@ -40,11 +40,13 @@ ActiveRecord::Schema.define(version: 2018_10_02_155017) do
     t.bigint "user_id"
     t.string "payable_type"
     t.bigint "payable_id"
-    t.string "fee"
+    t.integer "fee"
     t.decimal "amount"
     t.string "status"
+    t.date "expiration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["payable_id", "payable_type"], name: "index_payments_on_payable_id_and_payable_type"
     t.index ["payable_type", "payable_id"], name: "index_payments_on_payable_type_and_payable_id"
     t.index ["user_id"], name: "index_payments_on_user_id"
   end

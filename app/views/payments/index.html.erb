@@ -1,0 +1,102 @@
+<h1>Mes Actual</h1>
+<table class="table table-bordered table-stripped table-dark">
+  <thead>
+    <th>Detalle</th>
+    <th>M. de Pago</th>
+    <th>Cuota</th>
+    <th>Mes a pagar</th>
+    <th>Monto</th>
+    <th>Estado</th>
+    <th>Opciones</th>
+  </thead>
+  <tbody>
+    <% @current_payments.each do |payment| %>
+    <tr>
+      <td><%= payment.get_detail%></td>
+      <td><%= payment.get_pay_method %></td>
+      <td><%= payment.get_fee %></td>
+      <td><%= payment.expiration %></td>
+      <td><%= number_to_currency payment.amount %></td>
+      <td><%= payment.status %></td>
+      <td>...</td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<h2>Mes Siguiente</h2>
+<table class="table table-bordered table-stripped table-dark">
+  <thead>
+    <th>Detalle</th>
+    <th>M. de Pago</th>
+    <th>Cuota</th>
+    <th>Mes a pagar</th>
+    <th>Monto</th>
+    <th>Estado</th>
+    <th>Opciones</th>
+  </thead>
+  <tbody>
+    <% @next_month_payments.each do |payment| %>
+    <tr>
+      <td><%= payment.get_detail%></td>
+      <td><%= payment.get_pay_method %></td>
+      <td><%= payment.get_fee %></td>
+      <td><%= payment.expiration %></td>
+      <td><%= number_to_currency payment.amount %></td>
+      <td><%= payment.status %></td>
+      <td>...</td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<h3>Futuros pagos pendientes</h3>
+<table class="table table-bordered table-stripped table-dark">
+  <thead>
+    <th>Detalle</th>
+    <th>M. de Pago</th>
+    <th>Cuota</th>
+    <th>Mes a pagar</th>
+    <th>Monto</th>
+    <th>Estado</th>
+    <th>Opciones</th>
+  </thead>
+  <tbody>
+    <% @future_payments.each do |payment| %>
+    <tr>
+      <td><%= payment.get_detail%></td>
+      <td><%= payment.get_pay_method %></td>
+      <td><%= payment.get_fee %></td>
+      <td><%= payment.expiration %></td>
+      <td><%= number_to_currency payment.amount %></td>
+      <td><%= payment.status %></td>
+      <td>...</td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% if @has_past_payments %>
+<h4>Pagos vencidos sin pagar</h4>
+<table class="table table-bordered table-stripped table-dark">
+  <thead>
+    <th>Detalle</th>
+    <th>M. de Pago</th>
+    <th>Cuota</th>
+    <th>Mes a pagar</th>
+    <th>Monto</th>
+    <th>Estado</th>
+    <th>Opciones</th>
+  </thead>
+  <tbody>
+    <% @past_payments.each do |payment| %>
+    <tr>
+      <td><%= payment.get_detail%></td>
+      <td><%= payment.get_pay_method %></td>
+      <td><%= payment.get_fee %></td>
+      <td><%= payment.expiration %></td>
+      <td><%= number_to_currency payment.amount %></td>
+      <td><%= payment.status %></td>
+      <td>...</td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

@@ -6,4 +6,8 @@ class User < ApplicationRecord
   has_many :credit_cards
   has_many :purchases
   has_many :taxes
+  has_many :monthlies
+  has_many :payments
+
+  ################## METHODS
 end
