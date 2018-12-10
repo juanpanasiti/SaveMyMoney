@@ -13,20 +13,41 @@ class Purchase < ApplicationRecord
     return self.name.titleize
   end#get_user_name
   def get_pay_method
-    return self.credit_card.get_name
+    if self.credit_card.present?
+      return self.credit_card.get_name
+    else
+      return "Efectivo"
+    end
   end#get_pay_method
   def get_amount
-    return "$ #{self.amount.round(2)}"
+    return self.amount
   end#get_amount
   def get_fees
     return self.fees
   end#get_fees
   def get_first_payment_date
-    return self.first_payment
+    return self.first_payment.strftime("%b-%y")
   end#get_first_payment_date
+  def get_last_payment_date
+    return self.first_payment.advance(months: (self.fees - 1)).strftime("%b-%y")
+  end#get_last_payment_date
   def get_status
-    return self.status
+    paied_fees = self.payments.paied.count
+    if paied_fees == 0
+      return "Para pagar"
+    elsif paied_fees == self.fees
+      return "Pagado"
+    else
+      return "#{(paied_fees.to_f/self.fees.to_f*100).round(1)}% pagado"
+    end#if/elsif
   end#get_status
+  def get_remaining_balance
+    paied = 0
+    self.payments.paied.each do |payment|
+      paied = paied + payment.amount
+    end#each_do
+    return self.get_amount - paied
+  end#get_remaining_balance
 
   def generate_payments
     remaining_amount = self.amount

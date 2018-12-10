@@ -10,7 +10,7 @@
       <div class="card-body text-info">
         <h5 class="card-title"><%= cc.get_kind %></h5>
         <p class="card-text"> Vencimiento: <%= cc.get_expiration %> </p>
-        <p class="card-text"> Saldo: $ ####,## </p>
+        <p class="card-text"> Saldo: <%= number_to_currency cc.get_balance %> </p>
         <%= link_to icon('fas','trash'), credit_card_path(cc), method: :delete, data: { confirm: "Seguro?" }, class: "btn btn-danger" %>
         <%= link_to icon('fas','edit'), edit_credit_card_path(cc), class: "btn btn-warning" %>
         <%= link_to icon('fas','shopping-cart'), "#", data: { toggle: 'modal', target: ".cc-#{cc.id}" }, class: "btn btn-info" %>
@@ -25,7 +25,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                <strong>Saldo: </strong> <%= cc.get_balance %>
+                <strong>Saldo: </strong> <%= number_to_currency cc.get_balance %>
 
               </div>
               <div class="modal-footer">

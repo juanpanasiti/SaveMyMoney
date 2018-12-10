@@ -3,6 +3,11 @@ class Payment < ApplicationRecord
   belongs_to :user
 
   ############## SCOPES
+  scope :to_pay, -> { where(status: "Para pagar") }
+  scope :paied, -> { where(status: "Pagado") }
+  scope :from_purchase, -> { where(payable_type: :Purchase) }
+  scope :from_tax, -> { where(payable_type: :Tax) }
+  scope :from_monthly, -> { where(payable_type: :Monthly) }
   def self.current_month(user)
     date = Date.today
     start_date = date.at_beginning_of_month
@@ -29,6 +34,23 @@ class Payment < ApplicationRecord
     return user.payments.where("expiration < ?", start_date).where(status: "Para pagar")
   end
   ############## METHODS
+  def pay
+    self.status = "Pagado"
+    if self.save
+      return true
+    else
+      return false
+    end
+  end #pay
+  def unpay
+    self.status = "Para pagar"
+    if self.save
+      return true
+    else
+      return false
+    end
+  end #unpay
+
   def get_detail
     if self.payable_type == "Purchase"
       return self.payable.get_item_name
@@ -69,5 +91,8 @@ class Payment < ApplicationRecord
     end#if/elsif/else
   end#get_detail
 
+  def get_expiration
+    return self.expiration.strftime("%b-%y")
+  end
   ############ CLASS METHODS
 end#class Payment

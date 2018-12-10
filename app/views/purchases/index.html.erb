@@ -8,6 +8,7 @@
       <th>Monto</th>
       <th>Cuotas</th>
       <th>Primer Pago</th>
+      <th>Último Pago</th>
       <th>Saldo Restante</th>
       <th>Estado</th>
       <th>Opciones</th>
@@ -16,14 +17,19 @@
   <tbody>
     <% @purchases.each do |p| %>
     <tr>
-      <td> <%= p.get_item_name %> </td>
-      <td> <%= p.get_pay_method %> </td>
-      <td> <%= p.get_amount %> </td>
-      <td> <%= p.get_fees %> </td>
-      <td> <%= p.get_first_payment_date %> </td>
-      <td> <%= "??" %> </td>
-      <td> <%= p.get_status %> </td>
-      <td> <%= link_to "Crear pagos", create_payments_purchase_path(p), method: :post, class: "btn btn-primary" %> </td>
+      <td class="align-middle"> <%= p.get_item_name %> </td>
+      <td class="align-middle"> <%= p.get_pay_method %> </td>
+      <td class="align-middle"> <%= number_to_currency p.get_amount %> </td>
+      <td class="align-middle"> <%= p.get_fees %> </td>
+      <td class="align-middle"> <%= p.get_first_payment_date %> </td>
+      <td class="align-middle"> <%= p.get_last_payment_date %> </td>
+      <td class="align-middle"> <%= number_to_currency p.get_remaining_balance %> </td>
+      <td class="align-middle"> <%= p.get_status %> </td>
+      <td class="align-middle">
+        <% unless p.payments.count > 0 %>
+          <%= link_to icon('fab','amazon-pay'), create_payments_purchase_path(p), method: :post, class: "btn btn-info btn-sm" %>
+        <% end %>
+      </td>
     </tr>
     <% end %>
   </tbody>

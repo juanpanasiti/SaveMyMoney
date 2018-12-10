@@ -1,0 +1,15 @@
+<tr>
+  <td class="align-middle"><%= payment.get_detail%></td>
+  <td class="align-middle"><%= payment.get_pay_method %></td>
+  <td class="align-middle"><%= payment.get_fee %></td>
+  <td class="align-middle"><%= payment.get_expiration %></td>
+  <td class="align-middle"><%= number_to_currency payment.amount %></td>
+  <td class="align-middle"><%= payment.status %></td>
+  <td class="align-middle">
+    <% if payment.status == "Para pagar" %>
+    <%= link_to icon('fas','check'), pay_payment_path(payment), method: :post, class: "btn btn-success btn-sm" %>
+    <% else %>
+    <%= link_to icon('fas','times'), unpay_payment_path(payment), method: :post, class: "btn btn-danger btn-sm" %>
+    <% end %>
+  </td>
+</tr>

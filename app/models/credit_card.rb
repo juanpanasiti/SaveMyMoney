@@ -24,8 +24,13 @@ class CreditCard < ApplicationRecord
   end
   def get_balance
     balance = 0
-    
-    return "$####,##"
+    cc_pendings = (Payment.from_monthly.or(Payment.from_purchase)).to_pay
+    cc_pendings.each do |pending|
+      if pending.payable.credit_card == self
+        balance = balance + pending.amount
+      end
+    end
+    return "#{balance.round(2)}"
   end
   ####### CLASS METHODS
   def self.get_kind_options
@@ -36,6 +41,7 @@ class CreditCard < ApplicationRecord
     CreditCard.all.each do |cc|
       options << [cc.get_name,cc.id]
     end
+    options << ["Efectivo",nil]
     return options
   end
 end

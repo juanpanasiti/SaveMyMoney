@@ -11,15 +11,7 @@
   </thead>
   <tbody>
     <% @current_payments.each do |payment| %>
-    <tr>
-      <td><%= payment.get_detail%></td>
-      <td><%= payment.get_pay_method %></td>
-      <td><%= payment.get_fee %></td>
-      <td><%= payment.expiration %></td>
-      <td><%= number_to_currency payment.amount %></td>
-      <td><%= payment.status %></td>
-      <td>...</td>
-    </tr>
+    <%= render "table_content", payment: payment %>
     <% end %>
   </tbody>
 </table>
@@ -36,15 +28,7 @@
   </thead>
   <tbody>
     <% @next_month_payments.each do |payment| %>
-    <tr>
-      <td><%= payment.get_detail%></td>
-      <td><%= payment.get_pay_method %></td>
-      <td><%= payment.get_fee %></td>
-      <td><%= payment.expiration %></td>
-      <td><%= number_to_currency payment.amount %></td>
-      <td><%= payment.status %></td>
-      <td>...</td>
-    </tr>
+    <%= render "table_content", payment: payment %>
     <% end %>
   </tbody>
 </table>
@@ -61,15 +45,7 @@
   </thead>
   <tbody>
     <% @future_payments.each do |payment| %>
-    <tr>
-      <td><%= payment.get_detail%></td>
-      <td><%= payment.get_pay_method %></td>
-      <td><%= payment.get_fee %></td>
-      <td><%= payment.expiration %></td>
-      <td><%= number_to_currency payment.amount %></td>
-      <td><%= payment.status %></td>
-      <td>...</td>
-    </tr>
+    <%= render "table_content", payment: payment %>
     <% end %>
   </tbody>
 </table>
@@ -87,15 +63,7 @@
   </thead>
   <tbody>
     <% @past_payments.each do |payment| %>
-    <tr>
-      <td><%= payment.get_detail%></td>
-      <td><%= payment.get_pay_method %></td>
-      <td><%= payment.get_fee %></td>
-      <td><%= payment.expiration %></td>
-      <td><%= number_to_currency payment.amount %></td>
-      <td><%= payment.status %></td>
-      <td>...</td>
-    </tr>
+    <%= render "table_content", payment: payment %>
     <% end %>
   </tbody>
 </table>

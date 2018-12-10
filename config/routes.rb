@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   end
   resources :monthlies, except: :show
   resources :taxes, except: :show
-  resources :payments, except: :show
+  resources :payments, except: :show do
+    member do
+      post 'pay'
+      post 'unpay'
+    end#member-do
+  end#payments-do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
