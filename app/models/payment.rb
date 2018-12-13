@@ -57,7 +57,7 @@ class Payment < ApplicationRecord
     elsif self.payable_type == "Monthly"
       return "Es un pago mensual"
     elsif self.payable_type == "Tax"
-      return "Es un impuesto"
+      return self.payable.get_tax_name
     else
       return "Es de origen desconocido"
     end#if/elsif/else
@@ -92,7 +92,15 @@ class Payment < ApplicationRecord
   end#get_detail
 
   def get_expiration
-    return self.expiration.strftime("%b-%y")
+    if self.payable_type == "Purchase"
+      return self.expiration.strftime("%b-%y")
+    elsif self.payable_type == "Monthly"
+      return self.expiration.strftime("%b-%y")
+    elsif self.payable_type == "Tax"
+      return self.expiration.strftime("%d-%b-%y")
+    else
+      return "S/D"
+    end#if/elsif/else
   end
   ############ CLASS METHODS
 end#class Payment
