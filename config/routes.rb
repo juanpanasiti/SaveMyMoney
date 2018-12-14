@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   root 'home#index'
   resources :credit_cards, except: :show
   resources :purchases, except: :show do
-    post 'create_payments', on: :member
+    member do
+      post :create_payments
+      delete :delete_payments
+    end
   end
   resources :monthlies, except: :show do
     member do

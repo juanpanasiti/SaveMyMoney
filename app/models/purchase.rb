@@ -5,6 +5,7 @@ class Purchase < ApplicationRecord
   has_many :payments, as: :payable
   # Atributos: user_id, name, credit_card_id, amount, fees, first_payment, status
   ####### VALIDACIONES
+  validates_presence_of :name, :amount, :fees
   ####### METODOS
   def get_user
     return self.user.email

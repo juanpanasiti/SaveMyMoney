@@ -16,7 +16,7 @@ class CreditCard < ApplicationRecord
     return user
   end
   def get_expiration
-    expiration = self.expiration.blank? ? '' : self.expiration
+    expiration = self.expiration.blank? ? '' : self.expiration.strftime("%b-%y")
     return expiration
   end
   def get_name
