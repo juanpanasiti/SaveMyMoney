@@ -55,7 +55,7 @@ class Payment < ApplicationRecord
     if self.payable_type == "Purchase"
       return self.payable.get_item_name
     elsif self.payable_type == "Monthly"
-      return "Es un pago mensual"
+      return self.payable.get_name
     elsif self.payable_type == "Tax"
       return self.payable.get_tax_name
     else
@@ -67,7 +67,7 @@ class Payment < ApplicationRecord
     if self.payable_type == "Purchase"
       return self.payable.get_pay_method
     elsif self.payable_type == "Monthly"
-      return "$$"
+      return self.payable.get_pay_method
     elsif self.payable_type == "Tax"
       return "Efectivo"
     else
@@ -83,7 +83,10 @@ class Payment < ApplicationRecord
         return "#{self.fee} de #{self.payable.get_fees}"
       end
     elsif self.payable_type == "Monthly"
-      return "$$"
+      thisPayments = Payment.where(payable_type: :Monthly).where(payable_id: self.payable_id)
+      fees = thisPayments.count
+      fee = thisPayments.where("expiration >= ?", self.expiration).count
+      return "#{fee}/#{fees}"
     elsif self.payable_type == "Tax"
       return "Efectivo"
     else
@@ -95,7 +98,7 @@ class Payment < ApplicationRecord
     if self.payable_type == "Purchase"
       return self.expiration.strftime("%b-%y")
     elsif self.payable_type == "Monthly"
-      return self.expiration.strftime("%b-%y")
+      return self.expiration.strftime("%d-%b-%y")
     elsif self.payable_type == "Tax"
       return self.expiration.strftime("%d-%b-%y")
     else

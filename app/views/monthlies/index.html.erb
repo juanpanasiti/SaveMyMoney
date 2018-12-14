@@ -1,0 +1,22 @@
+<h1> Mensuales <small><%= @monthlies.count %> para pagar</small>  </h1>
+<%= link_to icon('fas','plus'), new_monthly_path, class: "btn btn-success" %>
+<table class="table table-stripped table-dark">
+  <thead>
+    <th>Pago</th>
+    <th>Monto</th>
+    <th>Medio de Pago</th>
+    <th>Acciones</th>
+  </thead>
+  <tbody>
+    <% @monthlies.each do |monthly| %>
+    <tr>
+      <td> <%= monthly.get_name %> </td>
+      <td> <%= number_to_currency monthly.get_amount %> </td>
+      <td> <%= monthly.get_pay_method %> </td>
+      <td>
+        <%= link_to "Agregar pago", new_payment_monthly_path(monthly), class: "btn btn-primary" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

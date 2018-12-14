@@ -1,5 +1,5 @@
 class TaxesController < ApplicationController
-  before_action :set_tax, only: [:edit, :update, :destroy, :create_payments, :new_payments]
+  before_action :set_tax, only: [:edit, :update, :destroy, :create_payment, :new_payment]
   before_action :options_for_select, only: [:new, :create, :edit, :update]
 
   def index
@@ -31,10 +31,10 @@ class TaxesController < ApplicationController
     #code
   end
 
-  def new_payments
+  def new_payment
     @payment = @tax.payments.new
   end
-  def create_payments
+  def create_payment
     @payment = current_user.payments.new(payment_params)
     @payment.status = "Para pagar"
     @payment.payable_type = "Tax"
@@ -44,7 +44,7 @@ class TaxesController < ApplicationController
       if @payment.save!
         format.html { redirect_to taxes_path, notice: 'Pago de Impuesto agregado.' }
       else
-        format.html { render :new_payments }
+        format.html { render :new_payment }
 
       end#if/else
     end#respond_to

@@ -5,11 +5,16 @@ Rails.application.routes.draw do
   resources :purchases, except: :show do
     post 'create_payments', on: :member
   end
-  resources :monthlies, except: :show
+  resources :monthlies, except: :show do
+    member do
+      get :new_payment
+      post :create_payment
+    end
+  end
   resources :taxes, except: :show do
     member do
-      get :new_payments
-      post :create_payments
+      get :new_payment
+      post :create_payment
     end
   end
   resources :payments, except: :show do
