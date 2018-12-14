@@ -1,1 +1,2 @@
 
+<%= line_chart Payment.group_by_month(:expiration).sum(:amount) %>
