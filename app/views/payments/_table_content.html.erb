@@ -13,3 +13,9 @@
     <% end %>
   </td>
 </tr>
+<% @cantItems += 1 %>
+<% if payment.get_pay_method == "Efectivo" %>
+  <% @totalEfectivo = payment.amount %>
+<% else %>
+  <% @totalTarjetas = payment.amount %>
+<% end %>

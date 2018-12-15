@@ -10,9 +10,18 @@
     <th>Opciones</th>
   </thead>
   <tbody>
+    <% @cantItems = 0 %>
+    <% @totalTarjetas = 0 %>
+    <% @totalEfectivo = 0 %>
     <% @current_payments.each do |payment| %>
     <%= render "table_content", payment: payment %>
     <% end %>
+    <tr>
+      <td>Cant. Items: <%= @cantItems %></td>
+      <td colspan="2">Tarjetas: <%= number_to_currency @totalTarjetas %></td>
+      <td colspan="2">Efectivo: <%= number_to_currency @totalEfectivo %></td>
+      <td colspan="2">Totales: <%= number_to_currency (@totalEfectivo + @totalTarjetas) %></td>
+    </tr>
   </tbody>
 </table>
 <h2>Mes Siguiente</h2>
@@ -27,9 +36,18 @@
     <th>Opciones</th>
   </thead>
   <tbody>
+    <% @cantItems = 0 %>
+    <% @totalTarjetas = 0 %>
+    <% @totalEfectivo = 0 %>
     <% @next_month_payments.each do |payment| %>
     <%= render "table_content", payment: payment %>
     <% end %>
+    <tr>
+      <td>Cant. Items: <%= @cantItems %></td>
+      <td colspan="2">Tarjetas: <%= number_to_currency @totalTarjetas %></td>
+      <td colspan="2">Efectivo: <%= number_to_currency @totalEfectivo %></td>
+      <td colspan="2">Totales: <%= number_to_currency (@totalEfectivo + @totalTarjetas) %></td>
+    </tr>
   </tbody>
 </table>
 <h3>Futuros pagos pendientes</h3>
